@@ -59,6 +59,10 @@
             <artifactId>tomcat-embed-jasper</artifactId>
             <scope>required</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -69,14 +73,6 @@
 
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/webapp</directory>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
     </build>
 
 </project>
