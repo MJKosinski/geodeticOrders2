@@ -1,5 +1,8 @@
 package com.geohor.geodeticordersbook.controller;
 
+import com.geohor.geodeticordersbook.entity.User;
+import com.geohor.geodeticordersbook.service.CurrentUser;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +35,13 @@ public class HomeController {
 
         }
 
+    }
+
+    @GetMapping("/admin")
+    @ResponseBody
+    public String admin(@AuthenticationPrincipal CurrentUser customUser) {
+        User entityUser = customUser.getUser();
+        return "this is user id " +entityUser.getId() ;
     }
 
 
