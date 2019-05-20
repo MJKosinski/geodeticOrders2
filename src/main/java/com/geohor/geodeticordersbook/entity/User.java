@@ -31,10 +31,6 @@ public class User {
     @Column(unique = true)
     private String email;
 
-
-    @Column
-    private UserType type;
-
     private int enabled;
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -81,14 +77,6 @@ public class User {
         this.email = email;
     }
 
-    public UserType getType() {
-        return type;
-    }
-
-    public void setType(UserType type) {
-        this.type = type;
-    }
-
     public int getEnabled() {
         return enabled;
     }
@@ -120,7 +108,6 @@ public class User {
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", type=" + type +
                 ", enabled=" + enabled +
                 '}';
     }
