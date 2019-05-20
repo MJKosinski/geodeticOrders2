@@ -27,25 +27,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new SpringDataUserDetailsService();
     }
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        super.configure(http);
-//
-//        http.authorizeRequests()
-//                .antMatchers("/geo")
-//                .hasRole("GEODESY")
-//                .and()
-//                .formLogin()
-//                .permitAll();
-//    }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        super.configure(http);
+
+        http.authorizeRequests()
+                .antMatchers("/geo")
+                .hasRole("GEODESY")
+                .and()
+                .formLogin()
+                .permitAll();
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         super.configure(auth);
         auth.jdbcAuthentication().dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
-        .withUser("admin")
-        .password(passwordEncoder().encode("admin"))
-        .roles("ADMIN", "GEODESY");
+                .withUser("admin")
+                .password(passwordEncoder().encode("admin"))
+                .roles("ADMIN", "GEODESY");
     }
+
+
+
 }
