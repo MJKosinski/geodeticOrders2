@@ -9,10 +9,10 @@ public class CurrentUser extends User {
 
     private final com.geohor.geodeticordersbook.entity.User user;
 
-    public CurrentUser(String username, String password, Collection<?
-            extends GrantedAuthority> authorities,
+    public CurrentUser(String username, String password, Collection<? extends GrantedAuthority> authorities,
                        com.geohor.geodeticordersbook.entity.User user) {
-        super(username, password, authorities); this.user = user;
+        super(username, password, authorities);
+        this.user = user;
     }
 
     public com.geohor.geodeticordersbook.entity.User getUser() {return user;}

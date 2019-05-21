@@ -31,10 +31,10 @@ RoleInit roleInit;
     public List<User> createUsers() {
 
         List<User> users = new ArrayList<>();
-        Role admin = roleRepository.findByName("ADMIN");
-        Role geodesy = roleRepository.findByName("GEODESY");
-        Role gw = roleRepository.findByName("GENERAL_CONSTRUCTOR");
-        Role sub = roleRepository.findByName("SUBCONSTRUCTOR");
+        Role admin = roleRepository.findByName("ROLE_ADMIN");
+        Role geodesy = roleRepository.findByName("ROLE_GEODESY");
+        Role gw = roleRepository.findByName("ROLE_GENERAL_CONSTRUCTOR");
+        Role sub = roleRepository.findByName("ROLE_SUBCONSTRUCTOR");
 
         User geoUser = new User();
         geoUser.setName("geo");

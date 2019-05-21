@@ -11,10 +11,10 @@ public class RoleInit {
 
     public Set<Role> roleList() {
         Set<Role> rolelist = new HashSet<>();
-        rolelist.add(new Role("ADMIN"));
-        rolelist.add(new Role("GEODESY"));
-        rolelist.add(new Role("GENERAL_CONSTRUCTOR"));
-        rolelist.add(new Role("SUBCONSTRUCTOR"));
+        rolelist.add(new Role("ROLE_ADMIN"));
+        rolelist.add(new Role("ROLE_GEODESY"));
+        rolelist.add(new Role("ROLE_GENERAL_CONSTRUCTOR"));
+        rolelist.add(new Role("ROLE_SUBCONSTRUCTOR"));
         return rolelist;
     }
 

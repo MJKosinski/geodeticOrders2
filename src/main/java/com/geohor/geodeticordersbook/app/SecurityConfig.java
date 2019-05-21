@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -33,29 +34,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
-
-        http.authorizeRequests()
-                .antMatchers("/geo")
-                .hasRole("ADMIN")
-        .and().formLogin()
-        .and()
-        .logout().logoutSuccessUrl("/logout")
-
-//                .anyRequest()
-//                .permitAll()
-        ;
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .passwordEncoder(passwordEncoder())
+                .usersByUsernameQuery("SELECT name,password,enabled FROM users WHERE name = ?")
+                .authoritiesByUsernameQuery("select name,role.role FROM users " +
+                " JOIN user_role ON users.id=user_role.user_id " +
+                "JOIN role ON role.role_id=user_role.role_id WHERE name=?");
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        super.configure(auth);
-        auth.jdbcAuthentication().dataSource(dataSource)
-                .passwordEncoder(passwordEncoder())
-        .authoritiesByUsernameQuery("select name,role.role FROM users " +
-                " JOIN user_role ON users.id=user_role.user_id " +
-                "JOIN role ON role.role_id=user_role.role_id WHERE name=?");
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/geo")
+                .hasRole("GEODESY")
+                .antMatchers("/gw","/sub", "/admin")
+                .authenticated()
+                .anyRequest()
+                .permitAll()
+                .and()
+                .formLogin()
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/")
+        ;
     }
 
 
