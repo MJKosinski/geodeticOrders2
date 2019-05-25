@@ -47,9 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/geo")
-                .hasRole("GEODESY")
-                .antMatchers("/gw","/sub", "/admin")
+                .antMatchers("/geo**")
+                .hasAnyRole("GEODESY", "ADMIN")
+                .antMatchers("/gw**")
+                .hasAnyRole("GENERAL_CONSTRUCTOR", "ADMIN")
+                .antMatchers("/sub**")
+                .hasAnyRole("SUBCONSTRUCTOR", "ADMIN")
+                .antMatchers("/admin")
                 .authenticated()
                 .anyRequest()
                 .permitAll()
@@ -63,9 +67,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
         ;
     }
-
-
-
-
-
 }

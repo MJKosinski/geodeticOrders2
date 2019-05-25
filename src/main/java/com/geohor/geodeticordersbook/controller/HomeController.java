@@ -5,6 +5,7 @@ import com.geohor.geodeticordersbook.service.CurrentUser;
 import org.springframework.http.HttpRequest;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,6 +49,14 @@ public class HomeController {
     public String admin(@AuthenticationPrincipal CurrentUser customUser) {
         User entityUser = customUser.getUser();
         return "this is user id " +entityUser.getId() ;
+    }
+
+
+    @GetMapping("/admin2")
+    @ResponseBody
+    public String admin2(@AuthenticationPrincipal UserDetails customUser) {
+
+        return "this is user " + customUser;
     }
 
 //    @GetMapping("/logout")

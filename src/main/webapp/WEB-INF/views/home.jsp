@@ -14,6 +14,7 @@
 <a href="${pageContext.request.contextPath}/sub" class="btn btn-info rounded-0 text-light m-1">SUB</a><br>
 <hr>
 <a href="${pageContext.request.contextPath}/admin" class="btn btn-info rounded-0 text-light m-1">admin</a><br>
+<a href="${pageContext.request.contextPath}/admin2" class="btn btn-info rounded-0 text-light m-1">admin2</a><br>
 <a href="<c:url value="/logout" />">Logout</a>
 
 
